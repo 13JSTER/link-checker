@@ -30,7 +30,7 @@ This public repository showcases the concept and basic functionality of URLY Sca
 
 **Price: $49 (one-time payment)**
 
-📧 Email: jester.penaloza@example.com  
+📧 Email: penalozajester@gmail.com  
 📋 Subject: URLY Scanner - Full Version Purchase
 
 [📖 Read more about demo vs full version](DEMO_VERSION.md)
