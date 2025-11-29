@@ -1,0 +1,52 @@
+DEMO VERSION LICENSE
+
+Copyright (c) 2025 Jester Penaloza
+
+DEMO VERSION - EVALUATION LICENSE
+
+This is a LIMITED DEMO VERSION of URLY Scanner provided for evaluation purposes only.
+
+PERMISSIONS:
+✅ You may view and study the code
+✅ You may run the demo version locally for evaluation
+✅ You may test the basic features
+
+RESTRICTIONS:
+❌ You may NOT use this in production
+❌ You may NOT use this commercially
+❌ You may NOT redistribute or resell
+❌ You may NOT remove demo limitations
+❌ You may NOT modify for commercial use
+❌ You may NOT access premium features without purchase
+
+TO GET FULL VERSION:
+Purchase the full version to receive:
+- Complete source code
+- All premium features unlocked
+- Commercial use license
+- Lifetime updates
+- Priority support
+
+PRICING:
+💎 Full Version: $49 (one-time)
+🏢 Enterprise License: $199 (with white-label rights)
+
+CONTACT:
+Email: jester.penaloza@example.com
+GitHub: https://github.com/13JSTER/link-checker
+
+THE SOFTWARE IS PROVIDED "AS IS" FOR EVALUATION PURPOSES ONLY.
+NO WARRANTY IS PROVIDED FOR THE DEMO VERSION.
+
+For commercial use, you must purchase a full license.
+
+---
+
+Full Version License (After Purchase):
+Upon purchase, you receive a commercial license allowing:
+- Production use
+- Commercial applications
+- Code modification
+- Private deployment
+
+Purchase to unlock: [Your Sales Page URL]

@@ -1,4 +1,43 @@
-# URLY Scanner - URL Link Checker
+# 🎯 URLY Scanner - URL Link Checker
+
+## ⚠️ THIS IS A DEMO VERSION
+
+**You are viewing a LIMITED DEMO VERSION for evaluation purposes.**
+
+This public repository showcases the concept and basic functionality of URLY Scanner.
+
+### 🆓 Demo Version Includes:
+- ✅ Basic URL scanning (3 scans per session)
+- ✅ Simple threat detection
+- ✅ Basic UI demonstration
+- ✅ Code structure for learning
+
+### 🔒 Full Version Includes:
+- 💎 **Unlimited scans** - No limitations
+- 🔌 **Full API access** - RESTful API endpoints
+- 📊 **Advanced analytics** - Detailed threat intelligence
+- 📈 **Historical data** - Track all scans over time
+- 🎯 **Custom threat feeds** - Add your own blocklists
+- 🛡️ **Premium features** - SSL analysis, email alerts, and more
+- 📱 **Complete source code** - All features unlocked
+- ✅ **Commercial license** - Use in production
+- 🚀 **Lifetime updates** - All future updates included
+- 💬 **Priority support** - Email support included
+
+---
+
+## 💰 Get Full Version
+
+**Price: $49 (one-time payment)**
+
+📧 Email: jester.penaloza@example.com  
+📋 Subject: URLY Scanner - Full Version Purchase
+
+[📖 Read more about demo vs full version](DEMO_VERSION.md)
+
+---
+
+## About URLY Scanner
 
 A modern URL scanning and validation tool built with Vite, React, and MySQL.
 
