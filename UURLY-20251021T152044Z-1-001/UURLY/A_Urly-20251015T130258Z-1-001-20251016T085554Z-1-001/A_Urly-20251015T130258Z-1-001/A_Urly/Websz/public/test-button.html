@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Config Button Test</title>
+</head>
+<body style="margin: 0; padding: 20px; background: #f5f5f5;">
+  <h1>Configuration Button Test Page</h1>
+  <p>This is a simple test page to verify the configuration button appears correctly.</p>
+  <p>You should see a blue circular ⚙️ button in the bottom-right corner.</p>
+  
+  <div style="margin: 20px 0; padding: 15px; background: #fff; border-left: 4px solid #007bff;">
+    <h3>Debug Information:</h3>
+    <div id="debug-info"></div>
+  </div>
+
+  <!-- Load configuration scripts -->
+  <script src="/js/scanner-config.js"></script>
+  <script src="/js/config-manager.js"></script>
+  <script src="/js/result-display.js"></script>
+  <script src="/js/config-ui.js"></script>
+
+  <script>
+    const debugDiv = document.getElementById('debug-info');
+    
+    function log(message, isError = false) {
+      const p = document.createElement('p');
+      p.style.color = isError ? 'red' : 'green';
+      p.style.margin = '5px 0';
+      p.textContent = message;
+      debugDiv.appendChild(p);
+      console.log(message);
+    }
+
+    // Initialize after a short delay
+    setTimeout(async () => {
+      try {
+        log('✅ Scripts loaded');
+        log('scannerConfig available: ' + (typeof scannerConfig !== 'undefined'));
+        log('ConfigManager available: ' + (typeof ConfigManager !== 'undefined'));
+        log('ConfigUI available: ' + (typeof ConfigUI !== 'undefined'));
+        
+        // Initialize config manager
+        if (typeof ConfigManager !== 'undefined') {
+          window.configManager = new ConfigManager();
+          await window.configManager.init();
+          log('✅ ConfigManager initialized');
+        }
+        
+        // Initialize config UI
+        if (typeof ConfigUI !== 'undefined' && window.configManager) {
+          const configUI = new ConfigUI(window.configManager);
+          configUI.init();
+          window.configUI = configUI;
+          log('✅ ConfigUI initialized');
+          
+          // Check if button exists
+          setTimeout(() => {
+            const button = document.getElementById('config-toggle');
+            if (button) {
+              log('✅ Button found in DOM!');
+              log('Button position: ' + button.style.position);
+              log('Button bottom: ' + button.style.bottom);
+              log('Button right: ' + button.style.right);
+              log('Button z-index: ' + button.style.zIndex);
+              log('Button display: ' + window.getComputedStyle(button).display);
+              log('Button visibility: ' + window.getComputedStyle(button).visibility);
+            } else {
+              log('❌ Button NOT found in DOM', true);
+            }
+          }, 100);
+        }
+      } catch (error) {
+        log('❌ Error: ' + error.message, true);
+        console.error(error);
+      }
+    }, 500);
+  </script>
+</body>
+</html>

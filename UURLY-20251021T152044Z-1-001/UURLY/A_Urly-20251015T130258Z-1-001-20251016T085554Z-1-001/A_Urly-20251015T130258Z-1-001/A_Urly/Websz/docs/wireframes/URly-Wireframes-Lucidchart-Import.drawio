@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram xmlns="http://www.gliffy.com/xmlns/diagram/2.0" name="URly Scanner Wireframes" width="2000" height="1500">
+  <stage gridOn="true" snapToGrid="true" width="2000" height="1500" background="#FFFFFF">
+    <layer name="Layer 1" active="true">
+      
+      <!-- SCREEN 1: MAIN INTERFACE -->
+      <shape id="s1-container" type="rectangle" x="50" y="100" width="400" height="500">
+        <strokeColor r="59" g="130" b="246"/>
+        <strokeWidth>3</strokeWidth>
+        <fillColor r="30" g="41" b="59"/>
+        <cornerRadius>10</cornerRadius>
+      </shape>
+      
+      <shape id="s1-title" type="text" x="100" y="140" width="300" height="40">
+        <text>Link Safety Checker</text>
+        <fontSize>24</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s1-desc" type="text" x="100" y="190" width="300" height="50">
+        <text>Paste one or more links (one per line). We'll check HTTPS, scan for suspicious wording, count external links, and record the time scanned.</text>
+        <fontSize>10</fontSize>
+        <fontColor r="203" g="213" b="225"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s1-textarea" type="rectangle" x="100" y="260" width="300" height="140">
+        <strokeColor r="75" g="85" b="99"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="45" g="55" b="72"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s1-btn-scan" type="rectangle" x="120" y="430" width="110" height="40">
+        <strokeColor r="37" g="99" b="235"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="59" g="130" b="246"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s1-btn-text" type="text" x="120" y="430" width="110" height="40">
+        <text>Scan Links</text>
+        <fontSize>14</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <shape id="s1-label" type="text" x="50" y="70" width="400" height="25">
+        <text>SCREEN 1: MAIN INTERFACE</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="59" g="130" b="246"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <!-- SCREEN 2: SCANNING -->
+      <shape id="s2-container" type="rectangle" x="500" y="100" width="400" height="500">
+        <strokeColor r="59" g="130" b="246"/>
+        <strokeWidth>3</strokeWidth>
+        <fillColor r="30" g="41" b="59"/>
+        <cornerRadius>10</cornerRadius>
+      </shape>
+      
+      <shape id="s2-title" type="text" x="550" y="140" width="300" height="40">
+        <text>Link Safety Checker</text>
+        <fontSize>24</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s2-scanning" type="text" x="550" y="450" width="300" height="30">
+        <text>Scanning (0/1)...</text>
+        <fontSize>14</fontSize>
+        <fontColor r="96" g="165" b="250"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s2-label" type="text" x="500" y="70" width="400" height="25">
+        <text>SCREEN 2: SCANNING PROGRESS</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="59" g="130" b="246"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <!-- ARROW 1 -->
+      <connector id="arrow1" from="s1-container" to="s2-container">
+        <strokeColor r="59" g="130" b="246"/>
+        <strokeWidth>3</strokeWidth>
+        <arrowEnd>true</arrowEnd>
+        <label>Click "Scan Links"</label>
+      </connector>
+      
+      <!-- SCREEN 3: SAFE RESULT -->
+      <shape id="s3-container" type="rectangle" x="950" y="100" width="1000" height="500">
+        <strokeColor r="16" g="185" b="129"/>
+        <strokeWidth>4</strokeWidth>
+        <fillColor r="255" g="255" b="255"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s3-label" type="text" x="950" y="70" width="1000" height="25">
+        <text>SCREEN 3: SAFE RESULT (3-COLUMN LAYOUT)</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="16" g="185" b="129"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s3-badge" type="rectangle" x="970" y="120" width="960" height="35">
+        <strokeColor r="5" g="150" b="105"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="16" g="185" b="129"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s3-badge-text" type="text" x="970" y="120" width="960" height="35">
+        <text>GSB: SAFE</text>
+        <fontSize>14</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <!-- Column 1: Score Breakdown -->
+      <shape id="s3-col1" type="rectangle" x="970" y="170" width="280" height="410">
+        <strokeColor r="16" g="185" b="129"/>
+        <strokeWidth>3</strokeWidth>
+        <fillColor r="240" g="253" b="244"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s3-col1-title" type="text" x="980" y="180" width="260" height="30">
+        <text>📊 SCORE BREAKDOWN</text>
+        <fontSize>12</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s3-score1" type="text" x="990" y="225" width="240" height="40">
+        <text>🟢 Heuristic Analysis&#10;0 points | Flags: 0 ✓</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <shape id="s3-score2" type="text" x="990" y="280" width="240" height="40">
+        <text>🟢 Google Safe Browsing&#10;0 points | Status: safe</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <!-- Column 2: Scan Result -->
+      <shape id="s3-col2" type="rectangle" x="1270" y="170" width="330" height="410">
+        <strokeColor r="71" g="85" b="105"/>
+        <strokeWidth>3</strokeWidth>
+        <fillColor r="30" g="41" b="59"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s3-col2-title" type="text" x="1280" y="180" width="310" height="30">
+        <text>🔵 SCAN RESULT</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="51" g="65" b="85"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s3-circle" type="ellipse" x="1360" y="250" width="150" height="150">
+        <strokeColor r="5" g="150" b="105"/>
+        <strokeWidth>4</strokeWidth>
+        <fillColor r="16" g="185" b="129"/>
+      </shape>
+      
+      <shape id="s3-percent" type="text" x="1360" y="300" width="150" height="50">
+        <text>100%</text>
+        <fontSize>32</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <shape id="s3-status" type="text" x="1280" y="430" width="310" height="30">
+        <text>Safe</text>
+        <fontSize>18</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <!-- Column 3: Recommendations -->
+      <shape id="s3-col3" type="rectangle" x="1620" y="170" width="310" height="410">
+        <strokeColor r="59" g="130" b="246"/>
+        <strokeWidth>3</strokeWidth>
+        <fillColor r="239" g="246" b="255"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s3-col3-title" type="text" x="1630" y="180" width="290" height="30">
+        <text>💡 RECOMMENDATIONS</text>
+        <fontSize>12</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s3-rec1" type="text" x="1640" y="225" width="270" height="40">
+        <text>✅ This site appears&#10;legitimate and safe</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <!-- ARROW 2 -->
+      <connector id="arrow2" from="s2-container" to="s3-container">
+        <strokeColor r="16" g="185" b="129"/>
+        <strokeWidth>3</strokeWidth>
+        <arrowEnd>true</arrowEnd>
+        <label>Scan Complete</label>
+      </connector>
+      
+      <!-- SCREEN 4: UNSAFE RESULT -->
+      <shape id="s4-container" type="rectangle" x="50" y="650" width="1000" height="400">
+        <strokeColor r="239" g="68" b="68"/>
+        <strokeWidth>4</strokeWidth>
+        <fillColor r="255" g="255" b="255"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s4-label" type="text" x="50" y="620" width="1000" height="25">
+        <text>SCREEN 4: UNSAFE RESULT (3-COLUMN LAYOUT)</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="239" g="68" b="68"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s4-badge" type="rectangle" x="70" y="670" width="960" height="35">
+        <strokeColor r="220" g="38" b="38"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="239" g="68" b="68"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s4-badge-text" type="text" x="70" y="670" width="960" height="35">
+        <text>GSB: UNSAFE (DERIVED)</text>
+        <fontSize>14</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <shape id="s4-circle" type="ellipse" x="460" y="770" width="140" height="140">
+        <strokeColor r="220" g="38" b="38"/>
+        <strokeWidth>4</strokeWidth>
+        <fillColor r="239" g="68" b="68"/>
+      </shape>
+      
+      <shape id="s4-percent" type="text" x="460" y="815" width="140" height="50">
+        <text>10%</text>
+        <fontSize>32</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <shape id="s4-status" type="text" x="400" y="950" width="260" height="30">
+        <text>Very Unsafe</text>
+        <fontSize>16</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <!-- SCREEN 6: RISK SCORE MODAL -->
+      <shape id="s6-container" type="rectangle" x="1100" y="650" width="850" height="600">
+        <strokeColor r="139" g="92" b="246"/>
+        <strokeWidth>4</strokeWidth>
+        <fillColor r="255" g="255" b="255"/>
+        <cornerRadius>8</cornerRadius>
+      </shape>
+      
+      <shape id="s6-label" type="text" x="1100" y="620" width="850" height="25">
+        <text>SCREEN 6: RISK SCORE CALCULATION MODAL (NEW FEATURE)</text>
+        <fontSize>12</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <fillColor r="139" g="92" b="246"/>
+        <textAlign>center</textAlign>
+      </shape>
+      
+      <shape id="s6-header" type="rectangle" x="1100" y="650" width="850" height="45">
+        <strokeColor r="124" g="58" b="237"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="139" g="92" b="246"/>
+      </shape>
+      
+      <shape id="s6-header-text" type="text" x="1100" y="650" width="850" height="45">
+        <text>🔍 RISK SCORE CALCULATION</text>
+        <fontSize>16</fontSize>
+        <fontColor r="255" g="255" b="255"/>
+        <fontBold>true</fontBold>
+        <textAlign>center</textAlign>
+        <verticalAlign>middle</verticalAlign>
+      </shape>
+      
+      <shape id="s6-step1" type="rectangle" x="1120" y="710" width="810" height="70">
+        <strokeColor r="59" g="130" b="246"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="239" g="246" b="255"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s6-step1-text" type="text" x="1130" y="720" width="790" height="50">
+        <text>📍 STEP 1: URL Pattern Analysis (Heuristics)&#10;⚠️ Suspicious TLD | Points: +15&#10;Total Heuristic Score: 15 points</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <shape id="s6-step2" type="rectangle" x="1120" y="795" width="810" height="80">
+        <strokeColor r="16" g="185" b="129"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="240" g="253" b="244"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s6-step2-text" type="text" x="1130" y="805" width="790" height="60">
+        <text>📍 STEP 2: Base Safety Calculation&#10;Formula: Base Safety = 100% - Heuristic Score&#10;Calculation: 100% - 15 points = 85%&#10;Base Safety Score: 85%</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <shape id="s6-step3" type="rectangle" x="1120" y="890" width="810" height="130">
+        <strokeColor r="245" g="158" b="11"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="254" g="243" b="199"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s6-step3-text" type="text" x="1130" y="900" width="790" height="110">
+        <text>📍 STEP 3: Apply ALL Penalties &amp; Adjustments&#10;🎬 STARTING POINT: 85% Safety Score&#10;⚡ PENALTIES APPLIED:&#10;⚠️ 1. Many External Links -12.0% → 73%&#10;⚠️ 2. Misspellings Detected -10.0% → 63%&#10;⚠️ 3. Additional Adjustments -30.0% → 33%&#10;FINAL SAFETY: 33%</text>
+        <fontSize>9</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <shape id="s6-step4" type="rectangle" x="1120" y="1035" width="810" height="90">
+        <strokeColor r="239" g="68" b="68"/>
+        <strokeWidth>2</strokeWidth>
+        <fillColor r="254" g="226" b="226"/>
+        <cornerRadius>6</cornerRadius>
+      </shape>
+      
+      <shape id="s6-step4-text" type="text" x="1130" y="1045" width="790" height="70">
+        <text>📍 STEP 4: Final Risk Calculation&#10;Formula: Risk Score = 100 - Final Safety&#10;Calculation: 100 - 33% = 67&#10;Risk Level: HIGH RISK (50-75 range)&#10;Final Risk Score: 67</text>
+        <fontSize>10</fontSize>
+        <fontColor r="31" g="41" b="55"/>
+        <textAlign>left</textAlign>
+      </shape>
+      
+      <!-- ARROW TO MODAL -->
+      <connector id="arrow3" from="s3-circle" to="s6-container">
+        <strokeColor r="139" g="92" b="246"/>
+        <strokeWidth>3</strokeWidth>
+        <arrowEnd>true</arrowEnd>
+        <style>dashed</style>
+        <label>Click Risk Score</label>
+      </connector>
+      
+    </layer>
+  </stage>
+</diagram>

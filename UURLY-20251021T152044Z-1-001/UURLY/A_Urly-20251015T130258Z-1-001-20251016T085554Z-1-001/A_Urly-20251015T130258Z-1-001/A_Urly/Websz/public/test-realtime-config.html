@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Config Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #0a0e1a;
+      color: #e0e0e0;
+    }
+    h1 {
+      color: #4a90e2;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .test-section {
+      background: #1a1f2e;
+      border: 2px solid #2d3748;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .test-section h2 {
+      color: #4a90e2;
+      margin-top: 0;
+      border-bottom: 2px solid #2d3748;
+      padding-bottom: 10px;
+    }
+    .config-display {
+      background: #0f1419;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+    }
+    .config-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #2d3748;
+    }
+    .config-item:last-child {
+      border-bottom: none;
+    }
+    .config-label {
+      color: #9ca3af;
+      font-weight: 600;
+    }
+    .config-value {
+      color: #10b981;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    button {
+      background: linear-gradient(135deg, #4a90e2, #357abd);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.5);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .test-button {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    .status {
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-weight: 600;
+    }
+    .status.success {
+      background: #065f46;
+      color: #6ee7b7;
+      border: 1px solid #10b981;
+    }
+    .status.error {
+      background: #7f1d1d;
+      color: #fca5a5;
+      border: 1px solid #dc2626;
+    }
+    .status.info {
+      background: #1e3a8a;
+      color: #93c5fd;
+      border: 1px solid #3b82f6;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    input[type="number"] {
+      background: #0f1419;
+      border: 2px solid #2d3748;
+      color: #e0e0e0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      width: 80px;
+      margin: 0 10px;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+    .instructions {
+      background: #1e3a8a;
+      border-left: 4px solid #3b82f6;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    .instructions h3 {
+      margin-top: 0;
+      color: #93c5fd;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚡ Real-Time Configuration Test</h1>
+
+  <div class="instructions">
+    <h3>📋 How to Test:</h3>
+    <ol>
+      <li>Click "Refresh Current Config" to see current values</li>
+      <li>Change a value using the input fields and click "Update"</li>
+      <li>Immediately click "Refresh Current Config" again</li>
+      <li>If values update instantly (without waiting 30 seconds), real-time is working!</li>
+    </ol>
+  </div>
+
+  <div class="test-section">
+    <h2>📊 Current Configuration</h2>
+    <div class="config-display" id="currentConfig">
+      <div class="status info">Click "Refresh Current Config" to load...</div>
+    </div>
+    <button onclick="refreshConfig()">🔄 Refresh Current Config</button>
+  </div>
+
+  <div class="test-section">
+    <h2>✏️ Update Configuration</h2>
+    
+    <div style="margin: 20px 0;">
+      <strong>Max Batch Size:</strong>
+      <input type="number" id="batchSize" min="1" max="50" value="1" />
+      <button onclick="updateConfig('max_batch_size', document.getElementById('batchSize').value)">
+        Update Batch Size
+      </button>
+    </div>
+
+    <div style="margin: 20px 0;">
+      <strong>Max Concurrent Requests:</strong>
+      <input type="number" id="concurrent" min="1" max="20" value="3" />
+      <button onclick="updateConfig('max_concurrent_requests', document.getElementById('concurrent').value)">
+        Update Concurrent
+      </button>
+    </div>
+
+    <div style="margin: 20px 0;">
+      <strong>Max Redirects:</strong>
+      <input type="number" id="redirects" min="1" max="20" value="5" />
+      <button onclick="updateConfig('max_redirects', document.getElementById('redirects').value)">
+        Update Redirects
+      </button>
+    </div>
+
+    <div id="updateStatus"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>🧪 Automated Test</h2>
+    <p>This will change max_batch_size to different values and verify they apply immediately:</p>
+    <button class="test-button" onclick="runAutomatedTest()">▶ Run Automated Test</button>
+    <div id="testResults"></div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:5050';
+
+    async function refreshConfig() {
+      try {
+        const response = await fetch(`${API_BASE}/api/config`);
+        const data = await response.json();
+        
+        if (data.success) {
+          const configs = data.config.data;
+          const batchSize = configs.find(c => c.config_key === 'max_batch_size')?.config_value;
+          const concurrent = configs.find(c => c.config_key === 'max_concurrent_requests')?.config_value;
+          const redirects = configs.find(c => c.config_key === 'max_redirects')?.config_value;
+
+          document.getElementById('currentConfig').innerHTML = `
+            <div class="config-item">
+              <span class="config-label">Max Batch Size:</span>
+              <span class="config-value">${batchSize}</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">Max Concurrent Requests:</span>
+              <span class="config-value">${concurrent}</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">Max Redirects:</span>
+              <span class="config-value">${redirects}</span>
+            </div>
+            <div class="status success" style="margin-top: 10px;">
+              ✅ Config loaded at ${new Date().toLocaleTimeString()}
+            </div>
+          `;
+        }
+      } catch (error) {
+        document.getElementById('currentConfig').innerHTML = `
+          <div class="status error">❌ Error: ${error.message}</div>
+        `;
+      }
+    }
+
+    async function updateConfig(key, value) {
+      const statusDiv = document.getElementById('updateStatus');
+      try {
+        statusDiv.innerHTML = `<div class="status info">⏳ Updating ${key} to ${value}...</div>`;
+        
+        const response = await fetch(`${API_BASE}/api/config`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, value })
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          statusDiv.innerHTML = `
+            <div class="status success">
+              ✅ ${key} updated to ${value} successfully!<br>
+              Now click "Refresh Current Config" to verify real-time update.
+            </div>
+          `;
+          
+          // Auto-refresh after 1 second
+          setTimeout(refreshConfig, 1000);
+        } else {
+          statusDiv.innerHTML = `<div class="status error">❌ Update failed: ${data.error}</div>`;
+        }
+      } catch (error) {
+        statusDiv.innerHTML = `<div class="status error">❌ Error: ${error.message}</div>`;
+      }
+    }
+
+    async function runAutomatedTest() {
+      const resultsDiv = document.getElementById('testResults');
+      resultsDiv.innerHTML = '<div class="status info">🧪 Running automated test...</div>';
+      
+      const testValues = [5, 3, 10, 1, 7];
+      let allPassed = true;
+      let results = '';
+
+      for (let i = 0; i < testValues.length; i++) {
+        const testValue = testValues[i];
+        results += `<p><strong>Test ${i + 1}:</strong> Setting max_batch_size to ${testValue}</p>`;
+        
+        // Update config
+        const updateResponse = await fetch(`${API_BASE}/api/config`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'max_batch_size', value: testValue.toString() })
+        });
+
+        // Immediately check if it was applied (no wait)
+        await new Promise(resolve => setTimeout(resolve, 500)); // Small delay for server processing
+        
+        const checkResponse = await fetch(`${API_BASE}/api/config`);
+        const checkData = await checkResponse.json();
+        const actualValue = checkData.config.data.find(c => c.config_key === 'max_batch_size')?.config_value;
+
+        if (actualValue == testValue) {
+          results += `<div class="status success">✅ PASS: Value is ${actualValue} (expected ${testValue})</div>`;
+        } else {
+          results += `<div class="status error">❌ FAIL: Value is ${actualValue} (expected ${testValue})</div>`;
+          allPassed = false;
+        }
+      }
+
+      if (allPassed) {
+        results = `<div class="status success">
+          <h3>✅ ALL TESTS PASSED!</h3>
+          <p>Real-time configuration updates are working correctly.</p>
+          <p>Configuration changes are applied immediately without waiting for the 30-second refresh interval.</p>
+        </div>` + results;
+      } else {
+        results = `<div class="status error">
+          <h3>❌ SOME TESTS FAILED</h3>
+          <p>There may be an issue with real-time configuration updates.</p>
+        </div>` + results;
+      }
+
+      resultsDiv.innerHTML = results;
+    }
+
+    // Auto-load config on page load
+    window.addEventListener('load', refreshConfig);
+  </script>
+</body>
+</html>

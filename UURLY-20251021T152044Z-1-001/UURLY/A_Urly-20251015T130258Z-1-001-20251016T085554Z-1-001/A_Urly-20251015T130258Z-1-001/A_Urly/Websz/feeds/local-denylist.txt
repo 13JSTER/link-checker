@@ -1,0 +1,6 @@
+# Add one URL or host per line to force-block
+# Examples:
+# https://smartki.help/rewards
+# smartki.help
+smartki.help
+https://smartki.help/rewards

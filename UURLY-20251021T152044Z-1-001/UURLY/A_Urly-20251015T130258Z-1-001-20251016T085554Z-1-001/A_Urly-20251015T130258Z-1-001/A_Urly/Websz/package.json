@@ -1,0 +1,31 @@
+{
+  "name": "my-website-react-vite-full",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "scan": "node ./scanner/scan-server.js",
+    "dev:all": "powershell -NoProfile -Command \"Start-Process cmd -ArgumentList '/c npm run scan' ; npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "feeds:update": "node ./scripts/update-feeds.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.75.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "punycode": "^2.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.0",
+    "html-pdf-node": "^1.0.8",
+    "marked": "^16.4.1",
+    "vite": "^5.0.0"
+  }
+}

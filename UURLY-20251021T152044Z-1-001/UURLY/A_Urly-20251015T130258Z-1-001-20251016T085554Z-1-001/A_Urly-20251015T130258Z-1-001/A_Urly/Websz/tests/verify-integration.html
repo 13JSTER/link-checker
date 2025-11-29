@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URLY Integration Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-indicator.pending {
+            background: #fbbf24;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-indicator.success {
+            background: #10b981;
+        }
+
+        .status-indicator.error {
+            background: #ef4444;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .test-result {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .test-result pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px;
+            margin: 8px 0;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist li.done {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .checklist li.failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .summary {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 30px;
+        }
+
+        .summary h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 URLY Integration Verification Dashboard</h1>
+
+        <div class="status-grid">
+            <!-- Backend API Status -->
+            <div class="card">
+                <h2>
+                    <span class="status-indicator pending" id="apiStatus"></span>
+                    Backend API
+                </h2>
+                <p><strong>Endpoint:</strong> http://localhost:5050</p>
+                <div class="button-group">
+                    <button class="btn" onclick="testHealth()">Test Health</button>
+                    <button class="btn" onclick="testScan()">Test Scan</button>
+                </div>
+                <div class="test-result" id="apiResult">
+                    Waiting for test...
+                </div>
+            </div>
+
+            <!-- Frontend Status -->
+            <div class="card">
+                <h2>
+                    <span class="status-indicator pending" id="frontendStatus"></span>
+                    Frontend
+                </h2>
+                <p><strong>URL:</strong> http://localhost:5174</p>
+                <div class="button-group">
+                    <button class="btn" onclick="checkFrontend()">Check Frontend</button>
+                    <button class="btn" onclick="window.open('http://localhost:5174/', '_blank')">Open Site</button>
+                </div>
+                <div class="test-result" id="frontendResult">
+                    Waiting for test...
+                </div>
+            </div>
+
+            <!-- Configuration System -->
+            <div class="card">
+                <h2>
+                    <span class="status-indicator pending" id="configStatus"></span>
+                    Configuration
+                </h2>
+                <p><strong>Storage:</strong> localStorage</p>
+                <div class="button-group">
+                    <button class="btn" onclick="checkConfig()">Check Config</button>
+                    <button class="btn" onclick="testConfigPanel()">Test Panel</button>
+                </div>
+                <div class="test-result" id="configResult">
+                    Waiting for test...
+                </div>
+            </div>
+
+            <!-- URL Scanner Test -->
+            <div class="card">
+                <h2>
+                    <span class="status-indicator pending" id="scannerStatus"></span>
+                    URL Scanner
+                </h2>
+                <input type="text" class="url-input" id="testUrl" placeholder="Enter URL to scan (e.g., https://google.com)" value="https://google.com">
+                <div class="button-group">
+                    <button class="btn" onclick="scanCustomUrl()">Scan URL</button>
+                    <button class="btn" onclick="testBatchScan()">Test Batch</button>
+                </div>
+                <div class="test-result" id="scannerResult">
+                    Waiting for test...
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Checklist -->
+        <div class="summary">
+            <h2>Integration Checklist</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+            </div>
+            <ul class="checklist" id="checklist">
+                <li id="check1">⏳ Backend API responding on port 5050</li>
+                <li id="check2">⏳ Frontend accessible on port 5174</li>
+                <li id="check3">⏳ Configuration system initialized</li>
+                <li id="check4">⏳ Google Safe Browsing enabled</li>
+                <li id="check5">⏳ Scan endpoint functional</li>
+                <li id="check6">⏳ CORS configured properly</li>
+                <li id="check7">⏳ Blocklists loaded</li>
+                <li id="check8">⏳ Heuristics engine active</li>
+            </ul>
+
+            <div class="button-group">
+                <button class="btn" onclick="runFullTest()">🚀 Run Full Integration Test</button>
+                <button class="btn" onclick="location.reload()">🔄 Reset Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedChecks = 0;
+        const totalChecks = 8;
+
+        function updateProgress() {
+            const percentage = Math.round((completedChecks / totalChecks) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        function markCheckDone(checkId) {
+            const check = document.getElementById(checkId);
+            if (!check.classList.contains('done')) {
+                check.classList.add('done');
+                check.textContent = '✅ ' + check.textContent.substring(2);
+                completedChecks++;
+                updateProgress();
+            }
+        }
+
+        function markCheckFailed(checkId) {
+            const check = document.getElementById(checkId);
+            check.classList.add('failed');
+            check.textContent = '❌ ' + check.textContent.substring(2);
+        }
+
+        function setStatus(elementId, status) {
+            const indicator = document.getElementById(elementId);
+            indicator.className = 'status-indicator ' + status;
+        }
+
+        function displayResult(elementId, content, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.color = isError ? '#ef4444' : '#065f46';
+            if (typeof content === 'object') {
+                element.innerHTML = '<pre>' + JSON.stringify(content, null, 2) + '</pre>';
+            } else {
+                element.textContent = content;
+            }
+        }
+
+        async function testHealth() {
+            displayResult('apiResult', '⏳ Testing health endpoint...');
+            try {
+                const response = await fetch('http://localhost:5050/health');
+                const data = await response.json();
+                
+                if (data.ok) {
+                    setStatus('apiStatus', 'success');
+                    displayResult('apiResult', data);
+                    markCheckDone('check1');
+                    
+                    if (data.gsb && data.gsb.enabled) {
+                        markCheckDone('check4');
+                    }
+                    
+                    if (data.feeds) {
+                        markCheckDone('check7');
+                    }
+                    
+                    return true;
+                } else {
+                    throw new Error('Health check failed');
+                }
+            } catch (error) {
+                setStatus('apiStatus', 'error');
+                displayResult('apiResult', '❌ Error: ' + error.message, true);
+                markCheckFailed('check1');
+                return false;
+            }
+        }
+
+        async function testScan() {
+            displayResult('apiResult', '⏳ Testing scan endpoint with google.com...');
+            try {
+                const response = await fetch('http://localhost:5050/api/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: 'https://google.com' })
+                });
+                
+                const data = await response.json();
+                
+                if (data.verdict) {
+                    setStatus('apiStatus', 'success');
+                    displayResult('apiResult', data);
+                    markCheckDone('check5');
+                    markCheckDone('check6');
+                    
+                    if (data.heuristics) {
+                        markCheckDone('check8');
+                    }
+                    
+                    return true;
+                } else {
+                    throw new Error('Scan failed');
+                }
+            } catch (error) {
+                setStatus('apiStatus', 'error');
+                displayResult('apiResult', '❌ Error: ' + error.message, true);
+                markCheckFailed('check5');
+                return false;
+            }
+        }
+
+        async function checkFrontend() {
+            displayResult('frontendResult', '⏳ Checking frontend accessibility...');
+            try {
+                const response = await fetch('http://localhost:5174/');
+                
+                if (response.ok) {
+                    setStatus('frontendStatus', 'success');
+                    displayResult('frontendResult', '✅ Frontend is accessible!\n\nStatus: ' + response.status + '\nURL: http://localhost:5174/\n\nYou can now:\n- Visit the site\n- Use the URL scanner\n- Access the ⚙️ settings button');
+                    markCheckDone('check2');
+                    return true;
+                } else {
+                    throw new Error('Frontend not responding');
+                }
+            } catch (error) {
+                setStatus('frontendStatus', 'error');
+                displayResult('frontendResult', '❌ Error: ' + error.message + '\n\nMake sure Vite dev server is running:\nnpm run dev', true);
+                markCheckFailed('check2');
+                return false;
+            }
+        }
+
+        function checkConfig() {
+            displayResult('configResult', '⏳ Checking configuration system...');
+            try {
+                const configKey = 'urlScanner_config_v2';
+                const storedConfig = localStorage.getItem(configKey);
+                
+                if (storedConfig) {
+                    const config = JSON.parse(storedConfig);
+                    setStatus('configStatus', 'success');
+                    displayResult('configResult', '✅ Configuration found in localStorage!\n\n' + JSON.stringify(config, null, 2));
+                    markCheckDone('check3');
+                } else {
+                    setStatus('configStatus', 'pending');
+                    displayResult('configResult', 'ℹ️ No saved configuration yet.\n\nThis is normal on first run.\nConfiguration will be created when you:\n1. Open the site (http://localhost:5174)\n2. Click the ⚙️ settings button\n3. Change any setting');
+                }
+            } catch (error) {
+                setStatus('configStatus', 'error');
+                displayResult('configResult', '❌ Error: ' + error.message, true);
+            }
+        }
+
+        function testConfigPanel() {
+            displayResult('configResult', '📋 Manual Test Required:\n\n1. Go to: http://localhost:5174/\n2. Look for the ⚙️ button (bottom-right corner)\n3. Click it to open the settings panel\n4. Try changing a setting\n5. Click "Save Configuration"\n6. Come back here and click "Check Config" again');
+            window.open('http://localhost:5174/', '_blank');
+        }
+
+        async function scanCustomUrl() {
+            const urlInput = document.getElementById('testUrl');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                displayResult('scannerResult', '❌ Please enter a URL', true);
+                return;
+            }
+            
+            displayResult('scannerResult', '⏳ Scanning: ' + url);
+            try {
+                const response = await fetch('http://localhost:5050/api/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                const data = await response.json();
+                
+                setStatus('scannerStatus', 'success');
+                displayResult('scannerResult', data);
+                markCheckDone('check5');
+            } catch (error) {
+                setStatus('scannerStatus', 'error');
+                displayResult('scannerResult', '❌ Error: ' + error.message, true);
+            }
+        }
+
+        async function testBatchScan() {
+            const testUrls = [
+                'https://google.com',
+                'https://github.com',
+                'https://microsoft.com'
+            ];
+            
+            displayResult('scannerResult', '⏳ Testing batch scan with 3 URLs...');
+            
+            try {
+                const results = [];
+                for (const url of testUrls) {
+                    const response = await fetch('http://localhost:5050/api/scan', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: url })
+                    });
+                    const data = await response.json();
+                    results.push({ url, verdict: data.verdict });
+                }
+                
+                setStatus('scannerStatus', 'success');
+                displayResult('scannerResult', '✅ Batch scan completed!\n\n' + JSON.stringify(results, null, 2));
+            } catch (error) {
+                setStatus('scannerStatus', 'error');
+                displayResult('scannerResult', '❌ Batch scan failed: ' + error.message, true);
+            }
+        }
+
+        async function runFullTest() {
+            completedChecks = 0;
+            updateProgress();
+            
+            // Reset all checks
+            for (let i = 1; i <= totalChecks; i++) {
+                const check = document.getElementById('check' + i);
+                check.className = '';
+                check.textContent = '⏳ ' + check.textContent.substring(2);
+            }
+            
+            displayResult('apiResult', '⏳ Running tests...');
+            displayResult('frontendResult', '⏳ Running tests...');
+            displayResult('configResult', '⏳ Running tests...');
+            displayResult('scannerResult', '⏳ Running tests...');
+            
+            // Run tests in sequence
+            await testHealth();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await testScan();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await checkFrontend();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            checkConfig();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Final summary
+            if (completedChecks === totalChecks) {
+                alert('🎉 ALL TESTS PASSED! Your URLY scanner is 100% operational!');
+            } else if (completedChecks >= 5) {
+                alert('✅ Most tests passed! Check the results above for any issues.');
+            } else {
+                alert('⚠️ Some tests failed. Please check the results and ensure both servers are running.');
+            }
+        }
+
+        // Auto-run health check on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('🔍 Starting automatic verification...');
+                testHealth();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

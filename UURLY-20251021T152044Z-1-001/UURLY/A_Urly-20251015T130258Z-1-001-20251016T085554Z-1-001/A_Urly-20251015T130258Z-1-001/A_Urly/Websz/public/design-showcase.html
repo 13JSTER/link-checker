@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎨 Design Upgrade Showcase - URLY Scanner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+    
+    .feature-card p {
+      color: #64748b;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    
+    .feature-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+    
+    .feature-list li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      color: #1e293b;
+      font-size: 14px;
+    }
+    
+    .feature-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+    
+    .cta-section {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-top: 40px;
+    }
+    
+    .cta-section h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 16px;
+    }
+    
+    .cta-section p {
+      color: #64748b;
+      font-size: 1.125rem;
+      margin-bottom: 24px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.125rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .comparison-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .comparison-card.before {
+      border-top: 4px solid #ef4444;
+    }
+    
+    .comparison-card.after {
+      border-top: 4px solid #10b981;
+    }
+    
+    .comparison-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .comparison-card ul {
+      list-style: none;
+    }
+    
+    .comparison-card.before li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      color: #64748b;
+    }
+    
+    .comparison-card.before li::before {
+      content: '❌';
+      position: absolute;
+      left: 0;
+    }
+    
+    .comparison-card.after li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      color: #1e293b;
+    }
+    
+    .comparison-card.after li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="floating">🎨 Professional Design Upgrade</h1>
+      <p>Your scanner results now look like a million-dollar product!</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🎯</span>
+        <h3>Modern Card Design</h3>
+        <ul class="feature-list">
+          <li>Clean white cards with shadows</li>
+          <li>Smooth hover animations</li>
+          <li>20px rounded corners</li>
+          <li>Gradient status bars on top</li>
+          <li>Professional spacing</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">⭕</span>
+        <h3>Enhanced Safety Circle</h3>
+        <ul class="feature-list">
+          <li>120px diameter (bigger!)</li>
+          <li>Beautiful gradients</li>
+          <li>Rotating ring animation</li>
+          <li>Pulsing glow effect</li>
+          <li>Smooth hover scale</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Score Breakdown</h3>
+        <ul class="feature-list">
+          <li>Green gradient background</li>
+          <li>White metric cards</li>
+          <li>Chart emoji icon</li>
+          <li>Slide-in hover effect</li>
+          <li>Professional shadows</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">💡</span>
+        <h3>Recommendations</h3>
+        <ul class="feature-list">
+          <li>Blue gradient background</li>
+          <li>White recommendation cards</li>
+          <li>Checkmark bullets</li>
+          <li>Interactive hover effects</li>
+          <li>Clean typography</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">🏷️</span>
+        <h3>Modern Badges</h3>
+        <ul class="feature-list">
+          <li>Pill-shaped design</li>
+          <li>Color-coded gradients</li>
+          <li>Uppercase labels</li>
+          <li>2px borders</li>
+          <li>Hover elevation effect</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">✨</span>
+        <h3>Visual Effects</h3>
+        <ul class="feature-list">
+          <li>Pulsing glows</li>
+          <li>Rotating gradients</li>
+          <li>Entrance animations</li>
+          <li>Smooth transitions</li>
+          <li>GPU-accelerated (60 FPS!)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="comparison">
+      <div class="comparison-card before">
+        <h3>❌ Before</h3>
+        <ul>
+          <li>Basic borders</li>
+          <li>Simple backgrounds</li>
+          <li>Small safety circle</li>
+          <li>No visual hierarchy</li>
+          <li>Plain text layout</li>
+          <li>Basic hover effects</li>
+        </ul>
+      </div>
+      
+      <div class="comparison-card after">
+        <h3>✅ After</h3>
+        <ul>
+          <li>Gradient borders with glow</li>
+          <li>Professional gradient backgrounds</li>
+          <li>Large animated safety circle</li>
+          <li>Clear visual hierarchy</li>
+          <li>Structured grid layout</li>
+          <li>Sophisticated animations</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="cta-section">
+      <h2>🚀 Ready to See It In Action?</h2>
+      <p>Scan a URL and experience the professional design upgrade!</p>
+      <a href="/" class="cta-button">Try the Scanner →</a>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; color: white; opacity: 0.8;">
+      <p style="font-size: 14px;">
+        All improvements are live and working!<br>
+        Dark mode support included • Fully responsive • 60 FPS animations
+      </p>
+    </div>
+  </div>
+</body>
+</html>

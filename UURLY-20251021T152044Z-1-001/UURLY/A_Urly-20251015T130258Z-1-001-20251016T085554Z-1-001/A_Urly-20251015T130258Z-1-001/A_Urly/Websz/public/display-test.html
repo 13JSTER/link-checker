@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Config Test - URLY Scanner</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #7f8c8d;
+      margin-bottom: 40px;
+    }
+    
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .test-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .test-card h2 {
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #95a5a6;
+      transition: all 0.3s ease;
+    }
+    
+    .status-indicator.active {
+      background: #27ae60;
+      box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.2);
+    }
+    
+    .test-button {
+      width: 100%;
+      padding: 12px 24px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .test-button:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+    
+    .test-button:active {
+      transform: translateY(0);
+    }
+    
+    .test-result {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .result-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .result-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .result-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    
+    .config-value {
+      font-family: 'Courier New', monospace;
+      background: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    .instructions {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .instructions h2 {
+      color: #007bff;
+      margin-top: 0;
+    }
+    
+    .instructions ol {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    
+    .instructions li {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+    
+    .color-scheme-demo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .scheme-box {
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .scheme-box:hover {
+      transform: scale(1.05);
+    }
+    
+    .scheme-light {
+      background: #ffffff;
+      color: #2c3e50;
+      border: 2px solid #e9ecef;
+    }
+    
+    .scheme-dark {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border: 2px solid #444444;
+    }
+    
+    .scheme-auto {
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #1a1a1a 50%, #1a1a1a 100%);
+      color: #2c3e50;
+      border: 2px solid #007bff;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .loading {
+      animation: pulse 1.5s infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Display Configuration Live Test</h1>
+  <p class="subtitle">Test real-time display updates without page refresh</p>
+  
+  <div class="instructions">
+    <h2>📋 How to Test</h2>
+    <ol>
+      <li>Click the <strong>⚙️ Configuration button</strong> in the bottom-right corner</li>
+      <li>Navigate to the <strong>Display tab</strong></li>
+      <li>Click any test button below</li>
+      <li>Watch the configuration panel update <strong>instantly</strong></li>
+      <li>See the changes reflected in real-time!</li>
+    </ol>
+    <p><strong>Note:</strong> The buttons below will toggle the actual configuration values, so you'll see the config panel checkboxes change automatically.</p>
+  </div>
+  
+  <div class="test-grid">
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-detailed"></span>
+        Detailed Analysis
+      </h2>
+      <button class="test-button" onclick="toggleDetailedAnalysis()">
+        Toggle Detailed Analysis
+      </button>
+      <div id="result-detailed" class="test-result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-breakdown"></span>
+        Score Breakdown
+      </h2>
+      <button class="test-button" onclick="toggleScoreBreakdown()">
+        Toggle Score Breakdown
+      </button>
+      <div id="result-breakdown" class="test-result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-recommendations"></span>
+        Recommendations
+      </h2>
+      <button class="test-button" onclick="toggleRecommendations()">
+        Toggle Recommendations
+      </button>
+      <div id="result-recommendations" class="test-result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-performance"></span>
+        Performance Metrics
+      </h2>
+      <button class="test-button" onclick="togglePerformance()">
+        Toggle Performance Metrics
+      </button>
+      <div id="result-performance" class="test-result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-timestamps"></span>
+        Timestamps
+      </h2>
+      <button class="test-button" onclick="toggleTimestamps()">
+        Toggle Timestamps
+      </button>
+      <div id="result-timestamps" class="test-result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-card">
+      <h2>
+        <span class="status-indicator" id="status-color"></span>
+        Color Scheme
+      </h2>
+      <div class="color-scheme-demo">
+        <div class="scheme-box scheme-light" onclick="setColorScheme('light')">☀️ Light</div>
+        <div class="scheme-box scheme-dark" onclick="setColorScheme('dark')">🌙 Dark</div>
+        <div class="scheme-box scheme-auto" onclick="setColorScheme('auto')">🔄 Auto</div>
+      </div>
+      <div id="result-color" class="test-result" style="display: none;"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Wait for config manager to be ready
+    function waitForConfig() {
+      return new Promise((resolve) => {
+        if (window.configManager) {
+          resolve();
+        } else {
+          setTimeout(() => waitForConfig().then(resolve), 100);
+        }
+      });
+    }
+    
+    function showResult(id, message, type = 'success') {
+      const el = document.getElementById('result-' + id);
+      el.className = 'test-result result-' + type;
+      el.textContent = message;
+      el.style.display = 'block';
+      
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, 3000);
+    }
+    
+    function updateStatus(id, active) {
+      const indicator = document.getElementById('status-' + id);
+      if (active) {
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    }
+    
+    async function toggleDetailedAnalysis() {
+      await waitForConfig();
+      const current = window.configManager.get('display.showDetailedAnalysis');
+      const newValue = !current;
+      window.configManager.set('display.showDetailedAnalysis', newValue);
+      showResult('detailed', `Detailed Analysis: ${newValue ? 'ON' : 'OFF'}`, 'success');
+      updateStatus('detailed', newValue);
+    }
+    
+    async function toggleScoreBreakdown() {
+      await waitForConfig();
+      const current = window.configManager.get('display.showScoreBreakdown');
+      const newValue = !current;
+      window.configManager.set('display.showScoreBreakdown', newValue);
+      showResult('breakdown', `Score Breakdown: ${newValue ? 'ON' : 'OFF'}`, 'success');
+      updateStatus('breakdown', newValue);
+    }
+    
+    async function toggleRecommendations() {
+      await waitForConfig();
+      const current = window.configManager.get('display.showRecommendations');
+      const newValue = !current;
+      window.configManager.set('display.showRecommendations', newValue);
+      showResult('recommendations', `Recommendations: ${newValue ? 'ON' : 'OFF'}`, 'success');
+      updateStatus('recommendations', newValue);
+    }
+    
+    async function togglePerformance() {
+      await waitForConfig();
+      const current = window.configManager.get('display.showPerformanceMetrics');
+      const newValue = !current;
+      window.configManager.set('display.showPerformanceMetrics', newValue);
+      showResult('performance', `Performance Metrics: ${newValue ? 'ON' : 'OFF'}`, 'success');
+      updateStatus('performance', newValue);
+    }
+    
+    async function toggleTimestamps() {
+      await waitForConfig();
+      const current = window.configManager.get('display.showTimestamps');
+      const newValue = !current;
+      window.configManager.set('display.showTimestamps', newValue);
+      showResult('timestamps', `Timestamps: ${newValue ? 'ON' : 'OFF'}`, 'success');
+      updateStatus('timestamps', newValue);
+    }
+    
+    async function setColorScheme(scheme) {
+      await waitForConfig();
+      window.configManager.set('display.colorScheme', scheme);
+      showResult('color', `Color Scheme: ${scheme.toUpperCase()}`, 'info');
+      updateStatus('color', true);
+      
+      setTimeout(() => {
+        updateStatus('color', false);
+      }, 2000);
+    }
+    
+    // Initialize status indicators
+    async function initStatus() {
+      await waitForConfig();
+      updateStatus('detailed', window.configManager.get('display.showDetailedAnalysis'));
+      updateStatus('breakdown', window.configManager.get('display.showScoreBreakdown'));
+      updateStatus('recommendations', window.configManager.get('display.showRecommendations'));
+      updateStatus('performance', window.configManager.get('display.showPerformanceMetrics'));
+      updateStatus('timestamps', window.configManager.get('display.showTimestamps'));
+    }
+    
+    // Run on page load
+    initStatus();
+  </script>
+</body>
+</html>

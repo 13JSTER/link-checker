@@ -1,0 +1,36 @@
+# VERIFIED SAFE URLS (100% Real - Copy and paste for testing)
+https://google.com
+https://microsoft.com
+https://apple.com
+https://amazon.com
+https://github.com
+https://wikipedia.org
+https://stackoverflow.com
+https://mozilla.org
+https://w3.org
+https://ietf.org
+
+# VERIFIED CAUTION URLS (Real SSL/HTTP testing sites)
+http://neverssl.com
+http://httpforever.com
+https://expired.badssl.com
+https://wrong.host.badssl.com
+https://self-signed.badssl.com
+https://untrusted-root.badssl.com
+https://revoked.badssl.com
+https://mixed-script.badssl.com
+https://very.badssl.com
+https://superfish.badssl.com
+
+# VERIFIED MALWARE TEST (Official EICAR test files)
+https://secure.eicar.org/eicar.com
+https://secure.eicar.org/eicar.com.txt
+
+# VERIFIED URL SHORTENERS (Real services)
+https://bit.ly/test
+https://tinyurl.com/test
+https://youtu.be/dQw4w9WgXcQ
+
+# FOR PHISHING TESTING: Use phishtank.com directly
+# Visit https://www.phishtank.com/phish_search.php for current real phishing URLs
+# Note: Phishing URLs change daily, so get fresh ones from PhishTank

@@ -1,0 +1,546 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "URly Scanner Wireframes",
+    "description": "Link Safety Checker Interface Wireframes",
+    "author": "COE 221 Team",
+    "date": "2025-10-19"
+  },
+  "pages": [
+    {
+      "id": "page1",
+      "name": "Screen 1: Main Interface",
+      "shapes": [
+        {
+          "id": "screen1_bg",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 500,
+          "height": 600,
+          "fill": "#1E293B",
+          "stroke": "#3B82F6",
+          "strokeWidth": 3,
+          "rounded": true
+        },
+        {
+          "id": "screen1_title",
+          "type": "text",
+          "x": 100,
+          "y": 100,
+          "width": 400,
+          "height": 50,
+          "text": "Link Safety Checker",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center"
+        },
+        {
+          "id": "screen1_instructions",
+          "type": "text",
+          "x": 100,
+          "y": 160,
+          "width": 400,
+          "height": 60,
+          "text": "Paste one or more links (one per line). We'll check HTTPS, scan for suspicious wording, count external links, and record the time scanned.",
+          "fontSize": 12,
+          "color": "#CBD5E1",
+          "align": "center"
+        },
+        {
+          "id": "screen1_textarea",
+          "type": "rectangle",
+          "x": 100,
+          "y": 240,
+          "width": 400,
+          "height": 150,
+          "fill": "#2D3748",
+          "stroke": "#4B5563",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "screen1_toggle",
+          "type": "button",
+          "x": 430,
+          "y": 365,
+          "width": 60,
+          "height": 20,
+          "text": "👁️ Toggle",
+          "fill": "#3B82F6",
+          "color": "#FFFFFF",
+          "fontSize": 10
+        },
+        {
+          "id": "screen1_btn_scan",
+          "type": "button",
+          "x": 120,
+          "y": 420,
+          "width": 120,
+          "height": 40,
+          "text": "Scan Links",
+          "fill": "#3B82F6",
+          "color": "#FFFFFF",
+          "fontSize": 14,
+          "fontWeight": "bold"
+        },
+        {
+          "id": "screen1_btn_restart",
+          "type": "button",
+          "x": 260,
+          "y": 420,
+          "width": 100,
+          "height": 40,
+          "text": "Restart",
+          "fill": "#475569",
+          "color": "#FFFFFF",
+          "fontSize": 14
+        },
+        {
+          "id": "screen1_btn_clear",
+          "type": "button",
+          "x": 380,
+          "y": 420,
+          "width": 100,
+          "height": 40,
+          "text": "Clear History",
+          "fill": "#475569",
+          "color": "#FFFFFF",
+          "fontSize": 14
+        },
+        {
+          "id": "screen1_legend",
+          "type": "text",
+          "x": 100,
+          "y": 580,
+          "width": 400,
+          "height": 40,
+          "text": "Examples: 90-100% Very Safe — 80% Safe but with minor concerns\n70% and below Proceed with caution / potentially unsafe",
+          "fontSize": 10,
+          "color": "#94A3B8",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "page2",
+      "name": "Screen 2: Scanning Progress",
+      "shapes": [
+        {
+          "id": "screen2_bg",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 500,
+          "height": 600,
+          "fill": "#1E293B",
+          "stroke": "#3B82F6",
+          "strokeWidth": 3,
+          "rounded": true
+        },
+        {
+          "id": "screen2_title",
+          "type": "text",
+          "x": 100,
+          "y": 100,
+          "width": 400,
+          "height": 50,
+          "text": "Link Safety Checker",
+          "fontSize": 28,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center"
+        },
+        {
+          "id": "screen2_scanning",
+          "type": "text",
+          "x": 100,
+          "y": 480,
+          "width": 400,
+          "height": 30,
+          "text": "Scanning (0/1)...",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "color": "#60A5FA",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "page3",
+      "name": "Screen 3: Safe Result",
+      "shapes": [
+        {
+          "id": "screen3_badge",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 40,
+          "fill": "#10B981",
+          "stroke": "#059669",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "screen3_badge_text",
+          "type": "text",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 40,
+          "text": "GSB: SAFE",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center",
+          "verticalAlign": "middle"
+        },
+        {
+          "id": "screen3_col1",
+          "type": "rectangle",
+          "x": 50,
+          "y": 100,
+          "width": 300,
+          "height": 400,
+          "fill": "#FFFFFF",
+          "stroke": "#10B981",
+          "strokeWidth": 3,
+          "rounded": true
+        },
+        {
+          "id": "screen3_col1_title",
+          "type": "text",
+          "x": 60,
+          "y": 110,
+          "width": 280,
+          "height": 30,
+          "text": "📊 SCORE BREAKDOWN",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "fill": "#F0FDF4",
+          "align": "center"
+        },
+        {
+          "id": "screen3_col2",
+          "type": "rectangle",
+          "x": 370,
+          "y": 100,
+          "width": 330,
+          "height": 400,
+          "fill": "#1E293B",
+          "stroke": "#475569",
+          "strokeWidth": 3,
+          "rounded": true
+        },
+        {
+          "id": "screen3_col2_title",
+          "type": "text",
+          "x": 380,
+          "y": 110,
+          "width": 310,
+          "height": 30,
+          "text": "🔵 SCAN RESULT",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "fill": "#334155",
+          "align": "center"
+        },
+        {
+          "id": "screen3_circle",
+          "type": "circle",
+          "x": 470,
+          "y": 180,
+          "diameter": 150,
+          "fill": "#10B981",
+          "stroke": "#059669",
+          "strokeWidth": 4
+        },
+        {
+          "id": "screen3_percentage",
+          "type": "text",
+          "x": 470,
+          "y": 230,
+          "width": 150,
+          "height": 50,
+          "text": "100%",
+          "fontSize": 32,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center",
+          "verticalAlign": "middle"
+        },
+        {
+          "id": "screen3_status",
+          "type": "text",
+          "x": 380,
+          "y": 350,
+          "width": 310,
+          "height": 30,
+          "text": "Safe",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center"
+        },
+        {
+          "id": "screen3_col3",
+          "type": "rectangle",
+          "x": 720,
+          "y": 100,
+          "width": 330,
+          "height": 400,
+          "fill": "#FFFFFF",
+          "stroke": "#3B82F6",
+          "strokeWidth": 3,
+          "rounded": true
+        },
+        {
+          "id": "screen3_col3_title",
+          "type": "text",
+          "x": 730,
+          "y": 110,
+          "width": 310,
+          "height": 30,
+          "text": "💡 RECOMMENDATIONS",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "fill": "#EFF6FF",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "page4",
+      "name": "Screen 4: Unsafe Result",
+      "shapes": [
+        {
+          "id": "screen4_badge",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 40,
+          "fill": "#EF4444",
+          "stroke": "#DC2626",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "screen4_badge_text",
+          "type": "text",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 40,
+          "text": "GSB: UNSAFE (DERIVED)",
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center",
+          "verticalAlign": "middle"
+        },
+        {
+          "id": "screen4_circle",
+          "type": "circle",
+          "x": 470,
+          "y": 180,
+          "diameter": 150,
+          "fill": "#EF4444",
+          "stroke": "#DC2626",
+          "strokeWidth": 4
+        },
+        {
+          "id": "screen4_percentage",
+          "type": "text",
+          "x": 470,
+          "y": 230,
+          "width": 150,
+          "height": 50,
+          "text": "10%",
+          "fontSize": 32,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center",
+          "verticalAlign": "middle"
+        },
+        {
+          "id": "screen4_status",
+          "type": "text",
+          "x": 380,
+          "y": 350,
+          "width": 310,
+          "height": 30,
+          "text": "Very Unsafe",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "page5",
+      "name": "Screen 6: Risk Score Modal",
+      "shapes": [
+        {
+          "id": "modal_bg",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 600,
+          "fill": "#FFFFFF",
+          "stroke": "#8B5CF6",
+          "strokeWidth": 4,
+          "rounded": true
+        },
+        {
+          "id": "modal_header",
+          "type": "rectangle",
+          "x": 50,
+          "y": 50,
+          "width": 1000,
+          "height": 50,
+          "fill": "#8B5CF6",
+          "stroke": "#7C3AED",
+          "strokeWidth": 2
+        },
+        {
+          "id": "modal_title",
+          "type": "text",
+          "x": 50,
+          "y": 50,
+          "width": 950,
+          "height": 50,
+          "text": "🔍 RISK SCORE CALCULATION",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "align": "center",
+          "verticalAlign": "middle"
+        },
+        {
+          "id": "modal_step1",
+          "type": "rectangle",
+          "x": 70,
+          "y": 120,
+          "width": 960,
+          "height": 80,
+          "fill": "#EFF6FF",
+          "stroke": "#3B82F6",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "modal_step1_text",
+          "type": "text",
+          "x": 80,
+          "y": 130,
+          "width": 940,
+          "height": 60,
+          "text": "📍 STEP 1: URL Pattern Analysis (Heuristics)\n⚠️ Suspicious TLD | Points: +15\nTotal Heuristic Score: 15 points",
+          "fontSize": 11,
+          "align": "left"
+        },
+        {
+          "id": "modal_step2",
+          "type": "rectangle",
+          "x": 70,
+          "y": 220,
+          "width": 960,
+          "height": 100,
+          "fill": "#F0FDF4",
+          "stroke": "#10B981",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "modal_step2_text",
+          "type": "text",
+          "x": 80,
+          "y": 230,
+          "width": 940,
+          "height": 80,
+          "text": "📍 STEP 2: Base Safety Calculation\nFormula: Base Safety = 100% - Heuristic Score\nCalculation: 100% - 15 points = 85%\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBase Safety Score: 85%",
+          "fontSize": 11,
+          "align": "left"
+        },
+        {
+          "id": "modal_step3",
+          "type": "rectangle",
+          "x": 70,
+          "y": 340,
+          "width": 960,
+          "height": 150,
+          "fill": "#FEF3C7",
+          "stroke": "#F59E0B",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "modal_step3_text",
+          "type": "text",
+          "x": 80,
+          "y": 350,
+          "width": 940,
+          "height": 130,
+          "text": "📍 STEP 3: Apply ALL Penalties & Adjustments\n🎬 STARTING POINT: 85% Safety Score\n⚡ PENALTIES APPLIED:\n⚠️ 1. Many External Links -12.0% → 73%\n⚠️ 2. Misspellings Detected -10.0% → 63%\n⚠️ 3. Additional Adjustments -30.0% → 33%\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFINAL SAFETY: 33%",
+          "fontSize": 11,
+          "align": "left"
+        },
+        {
+          "id": "modal_step4",
+          "type": "rectangle",
+          "x": 70,
+          "y": 510,
+          "width": 960,
+          "height": 120,
+          "fill": "#FEE2E2",
+          "stroke": "#EF4444",
+          "strokeWidth": 2,
+          "rounded": true
+        },
+        {
+          "id": "modal_step4_text",
+          "type": "text",
+          "x": 80,
+          "y": 520,
+          "width": 940,
+          "height": 100,
+          "text": "📍 STEP 4: Final Risk Calculation\nFormula: Risk Score = 100 - Final Safety\nCalculation: 100 - 33% = 67\nRisk Level: HIGH RISK (50-75 range)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFinal Risk Score: 67",
+          "fontSize": 11,
+          "align": "left"
+        }
+      ]
+    }
+  ],
+  "connectors": [
+    {
+      "from": "page1",
+      "to": "page2",
+      "label": "Click 'Scan Links'",
+      "type": "arrow",
+      "color": "#3B82F6",
+      "strokeWidth": 3
+    },
+    {
+      "from": "page2",
+      "to": "page3",
+      "label": "Scan Complete",
+      "type": "arrow",
+      "color": "#10B981",
+      "strokeWidth": 3
+    },
+    {
+      "from": "page3",
+      "to": "page5",
+      "label": "Click Risk Score",
+      "type": "arrow",
+      "color": "#8B5CF6",
+      "strokeWidth": 3
+    }
+  ]
+}

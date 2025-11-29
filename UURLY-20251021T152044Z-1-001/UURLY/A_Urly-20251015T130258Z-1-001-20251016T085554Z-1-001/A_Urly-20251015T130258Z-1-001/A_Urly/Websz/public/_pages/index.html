@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/img/favicon.png" />
+  <title>HOME</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__container">
+        <a href="index.html" class="header__logo logo">
+          <img class="logo__img" src="/images/logo/shield-logo.svg" alt="Urly Warning - URL Safety Checker" onerror="this.onerror=null;this.src='/images/logo/IMG_2516 (1).jpeg'" />
+        </a>
+        <div class="header__navigation">
+          <div class="header__menu menu">
+            <nav class="menu__body">
+              <nav class="menu__body">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="#/" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="about.html" class="menu__link">About</a></li>
+                  <li class="menu__item"><a href="services.html" class="menu__link">Services</a></li>
+                  <li class="menu__item"><a href="contact.html" class="menu__link">Contact</a></li>
+                </ul>
+                <a href="#" class="actions-header__button">Urly Warning</a>
+              </nav>
+          </div>
+          <div class="header__actions actions-header">
+            <button type="button" id="themeToggle" class="actions-header__button" aria-label="Toggle dark mode">Dark</button>
+            <button type="button" class="menu__icon icon-menu"><span></span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="page">
+      <section class="page__main main">
+        <div class="main__container">
+          <h1 class="main__title">Link Safety Checker</h1>
+          <div class="main__text">
+            Paste one or more links (one per line). We'll check HTTPS, scan for suspicious wording, count external links, and record the time scanned.
+          </div>
+          <div id="scanner" class="scanner">
+            <textarea id="scannerInput" class="scanner__input" rows="6" placeholder="https://example.com\nhttps://another-site.com"></textarea>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="scanner__actions">
+              <button id="scanBtn" class="main__button">Scan Links</button>
+              <button id="restartBtn" class="actions-header__button" type="button">Restart</button>
+              <button id="clearHistoryBtn" class="actions-header__button" type="button">Clear History</button>
+            </div>
+            <!-- Live safety preview shown when a link is pasted or typed -->
+            <div id="liveSafety" class="scanner__live-safety" aria-live="polite"></div>
+            <div class="scanner__legend">Examples: <strong>90-100%</strong> Very Safe — <strong>80%</strong> Safe but with minor concerns — <strong>70% and below</strong> Proceed with caution / potentially unsafe</div>
+          </div>
+          <div id="scanSummary" class="scanner__summary" aria-live="polite"></div>
+          <div id="results" class="scanner__results"></div>
+          <div class="scanner__history">
+            <h3 class="scanner__history-title">Scan History</h3>
+            <div class="history-filters" role="group" aria-label="Filter history by status">
+              <button type="button" class="filter-button filter-active" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" class="filter-button" data-filter="safe" aria-pressed="false">Safe</button>
+              <button type="button" class="filter-button" data-filter="caution" aria-pressed="false">Caution</button>
+              <button type="button" class="filter-button" data-filter="unsafe" aria-pressed="false">Unsafe</button>
+            </div>
+            <div id="historyList" class="scanner__history-list"></div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="page__outro outro outro_home">
+        <div class="outro__container">
+          <h2 class="outro__title title">Talk To Us</h2>
+          <div class="outro__text">
+            We’d love to hear from you! If you have questions or feedback, feel free to reach out we’re here to help you browse safely and with confidence.
+          </div>
+          <a href="/contact.html" class="outro__button button">Contact</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__container">
+        <a href="#" class="footer__policy">Privacy Policy – Terms & Conditions</a>
+        <a href="" class="footer__logo logo">
+          <img class="logo__img" src="/images/logo/shield-logo.svg" alt="Urly Warning - URL Safety Checker" onerror="this.onerror=null;this.src='/images/logo/IMG_2516 (1).jpeg'" />
+        </a>
+        <div class="footer__copyright">Copyright © 2025 LOGO – All Rights Reserved</div>
+      </div>
+    </footer>
+  </div>
+  <script src="/js/script.js"></script>
+  <script>
+    // Function to initialize everything
+    function initializePage() {
+      if (window.attachUIEventListeners) {
+        window.attachUIEventListeners();
+      }
+      if (window.initScanner) {
+        window.initScanner();
+      }
+    }
+    
+    // Initialize when page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializePage);
+    } else {
+      // DOM is already loaded
+      initializePage();
+    }
+    
+    // Re-initialize when page becomes visible (for back navigation)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        setTimeout(initializePage, 100);
+      }
+    });
+    
+    // Re-initialize on focus (additional safety for navigation)
+    window.addEventListener('focus', function() {
+      setTimeout(initializePage, 100);
+    });
+  </script>
+  
+  <!-- Configuration System Scripts -->
+  <script src="/js/scanner-config.js"></script>
+  <script src="/js/config-manager.js"></script>
+  <script src="/js/result-display.js"></script>
+  <script src="/js/config-ui.js"></script>
+  
+  <!-- Initialize Configuration UI -->
+  <script>
+    // Initialize configuration UI when page is ready
+    window.addEventListener('DOMContentLoaded', async () => {
+      console.log('🔧 Starting Configuration UI initialization...');
+      
+      try {
+        // Wait a bit for all scripts to load
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Check if required classes are loaded
+        console.log('ConfigManager available:', typeof ConfigManager !== 'undefined');
+        console.log('ConfigUI available:', typeof ConfigUI !== 'undefined');
+        console.log('scannerConfig available:', typeof scannerConfig !== 'undefined');
+        
+        // Wait for config manager to initialize
+        if (typeof initConfigSystem !== 'undefined') {
+          await initConfigSystem();
+        } else {
+          console.warn('initConfigSystem not found, creating config manager manually');
+          if (typeof configManager === 'undefined' && typeof ConfigManager !== 'undefined') {
+            window.configManager = new ConfigManager();
+            await window.configManager.init();
+          }
+        }
+        
+        // Create and initialize config UI
+        if (typeof ConfigUI !== 'undefined' && typeof configManager !== 'undefined') {
+          console.log('✅ Creating Config UI...');
+          const configUI = new ConfigUI(configManager);
+          configUI.init();
+          window.configUI = configUI;
+          console.log('✅ Configuration UI ready - Look for ⚙️ button in bottom-right!');
+        } else {
+          console.error('❌ ConfigUI or configManager not available');
+          console.log('ConfigUI type:', typeof ConfigUI);
+          console.log('configManager type:', typeof configManager);
+        }
+      } catch (error) {
+        console.error('❌ Failed to initialize config UI:', error);
+        console.error('Error stack:', error.stack);
+      }
+    });
+    
+    // Also try on window load as backup
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.configUI && typeof ConfigUI !== 'undefined' && typeof configManager !== 'undefined') {
+          console.log('🔄 Retrying Config UI initialization on window load...');
+          try {
+            const configUI = new ConfigUI(configManager);
+            configUI.init();
+            window.configUI = configUI;
+            console.log('✅ Configuration UI initialized on second attempt');
+          } catch (error) {
+            console.error('❌ Second attempt failed:', error);
+          }
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+
+</html>

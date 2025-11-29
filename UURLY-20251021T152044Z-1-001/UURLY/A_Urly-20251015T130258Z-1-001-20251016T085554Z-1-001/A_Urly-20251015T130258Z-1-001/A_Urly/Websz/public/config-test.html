@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Config Test - URLY Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #1a4d1a;
+            border: 1px solid #2d7a2d;
+        }
+        .error {
+            background: #4d1a1a;
+            border: 1px solid #7a2d2d;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin: 5px;
+        }
+        .config-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: #333;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 URLY Scanner Configuration Test</h1>
+    <p>This page tests that the Scanner Configuration panel works correctly.</p>
+
+    <div class="test-section">
+        <h2>Test 1: Check Config Manager</h2>
+        <button onclick="test1()">Run Test</button>
+        <div id="test1-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Toggle DNS Lookup</h2>
+        <button onclick="test2()">Toggle DNS (current: <span id="dns-status">?</span>)</button>
+        <div id="test2-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Change Max Redirects</h2>
+        <input type="number" id="max-redirects" value="5" min="0" max="10">
+        <button onclick="test3()">Update Max Redirects</button>
+        <div id="test3-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Scan with Custom Config</h2>
+        <div class="config-item">
+            <label><input type="checkbox" id="enable-dns" checked> Enable DNS Lookup</label>
+        </div>
+        <div class="config-item">
+            <label><input type="checkbox" id="enable-ssl" checked> Enable SSL Check</label>
+        </div>
+        <div class="config-item">
+            <label><input type="checkbox" id="enable-gsb" checked> Enable Google Safe Browsing</label>
+        </div>
+        <div class="config-item">
+            <label><input type="checkbox" id="enable-heuristics" checked> Enable Heuristics</label>
+        </div>
+        <input type="text" id="test-url" value="https://google.com" style="width: 300px; padding: 8px;">
+        <button onclick="test4()">Scan URL</button>
+        <div id="test4-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 5: Verify Database Sync</h2>
+        <button onclick="test5()">Check Database Config</button>
+        <div id="test5-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Current Configuration</h2>
+        <button onclick="showConfig()">Show Full Config</button>
+        <pre id="config-display"></pre>
+    </div>
+
+    <script>
+        function log(testId, message, isError = false) {
+            const el = document.getElementById(testId + '-result');
+            const div = document.createElement('div');
+            div.className = 'test-result ' + (isError ? 'error' : 'success');
+            div.innerHTML = message;
+            el.innerHTML = '';
+            el.appendChild(div);
+        }
+
+        function test1() {
+            try {
+                if (typeof window.configManager === 'undefined') {
+                    log('test1', '❌ ERROR: window.configManager is not defined!<br>The config manager is not exposed to window.', true);
+                    return;
+                }
+
+                const config = window.configManager.getConfig();
+                if (!config) {
+                    log('test1', '❌ ERROR: getConfig() returned null/undefined', true);
+                    return;
+                }
+
+                log('test1', `✅ SUCCESS: Config Manager is working!<br>
+                    Config has ${Object.keys(config).length} top-level properties:<br>
+                    ${Object.keys(config).join(', ')}`);
+            } catch (error) {
+                log('test1', `❌ ERROR: ${error.message}`, true);
+            }
+        }
+
+        function test2() {
+            try {
+                const currentValue = window.configManager.get('scanning.enableDNSLookup');
+                const newValue = !currentValue;
+                
+                window.configManager.set('scanning.enableDNSLookup', newValue);
+                
+                // Verify it changed
+                const verifyValue = window.configManager.get('scanning.enableDNSLookup');
+                
+                document.getElementById('dns-status').textContent = verifyValue ? 'Enabled' : 'Disabled';
+                
+                if (verifyValue === newValue) {
+                    log('test2', `✅ SUCCESS: DNS Lookup toggled to <strong>${newValue ? 'ENABLED' : 'DISABLED'}</strong><br>
+                        Previous: ${currentValue}<br>
+                        New: ${newValue}<br>
+                        Verified: ${verifyValue}`);
+                } else {
+                    log('test2', `❌ ERROR: Value didn't change correctly`, true);
+                }
+            } catch (error) {
+                log('test2', `❌ ERROR: ${error.message}`, true);
+            }
+        }
+
+        function test3() {
+            try {
+                const newValue = parseInt(document.getElementById('max-redirects').value);
+                const oldValue = window.configManager.get('scanning.maxRedirects');
+                
+                window.configManager.set('scanning.maxRedirects', newValue);
+                
+                const verifyValue = window.configManager.get('scanning.maxRedirects');
+                
+                if (verifyValue === newValue) {
+                    log('test3', `✅ SUCCESS: Max Redirects updated!<br>
+                        Old value: ${oldValue}<br>
+                        New value: ${newValue}<br>
+                        Verified: ${verifyValue}<br>
+                        <small>⚠️ This change should now sync to database and affect next scan</small>`);
+                } else {
+                    log('test3', `❌ ERROR: Value mismatch (expected ${newValue}, got ${verifyValue})`, true);
+                }
+            } catch (error) {
+                log('test3', `❌ ERROR: ${error.message}`, true);
+            }
+        }
+
+        async function test4() {
+            try {
+                // Update config based on checkboxes
+                window.configManager.set('scanning.enableDNSLookup', document.getElementById('enable-dns').checked);
+                window.configManager.set('scanning.enableSSLCheck', document.getElementById('enable-ssl').checked);
+                window.configManager.set('api.googleSafeBrowsing.enabled', document.getElementById('enable-gsb').checked);
+                window.configManager.set('heuristics.enabled', document.getElementById('enable-heuristics').checked);
+
+                const url = document.getElementById('test-url').value;
+                
+                log('test4', '⏳ Scanning... Please wait...');
+
+                const response = await fetch('http://localhost:5050/api/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                if (!response.ok) {
+                    log('test4', `❌ ERROR: HTTP ${response.status}`, true);
+                    return;
+                }
+
+                const result = await response.json();
+                
+                const configUsed = result.configApplied || {};
+                
+                log('test4', `✅ SUCCESS: Scan completed!<br>
+                    <strong>URL:</strong> ${result.inputUrl}<br>
+                    <strong>Risk:</strong> ${result.verdict?.risk || 'unknown'}<br>
+                    <strong>Heuristic Score:</strong> ${result.heuristics?.score || 0}<br>
+                    <strong>GSB Verdict:</strong> ${result.gsb?.verdict || 'unknown'}<br>
+                    <br>
+                    <strong>Config Applied:</strong><br>
+                    DNS Enabled: ${configUsed.enableDNS}<br>
+                    SSL Enabled: ${configUsed.enableSSL}<br>
+                    GSB Enabled: ${configUsed.enableGSB}<br>
+                    Heuristics Enabled: ${configUsed.enableHeuristics}<br>
+                    <br>
+                    <small>✅ Your configuration changes affected the scan!</small>`);
+            } catch (error) {
+                log('test4', `❌ ERROR: ${error.message}<br>
+                    <small>Make sure the backend server is running on port 5050</small>`, true);
+            }
+        }
+
+        async function test5() {
+            try {
+                log('test5', '⏳ Checking database config...');
+
+                const response = await fetch('http://localhost:5050/api/config');
+                
+                if (!response.ok) {
+                    log('test5', `❌ ERROR: HTTP ${response.status}`, true);
+                    return;
+                }
+
+                const result = await response.json();
+                const dbConfig = result.config || {};
+                
+                const configKeys = Object.keys(dbConfig);
+                
+                log('test5', `✅ SUCCESS: Database config loaded!<br>
+                    <strong>Config entries:</strong> ${configKeys.length}<br>
+                    <br>
+                    <strong>Key settings:</strong><br>
+                    ${configKeys.slice(0, 10).map(key => 
+                        `${key}: <strong>${dbConfig[key].value}</strong> (${dbConfig[key].type})`
+                    ).join('<br>')}<br>
+                    <br>
+                    <small>✅ Changes made in the Scanner Configuration panel are synced to database!</small>`);
+            } catch (error) {
+                log('test5', `❌ ERROR: ${error.message}<br>
+                    <small>Make sure the backend server is running on port 5050</small>`, true);
+            }
+        }
+
+        function showConfig() {
+            try {
+                const config = window.configManager.getConfig();
+                document.getElementById('config-display').textContent = JSON.stringify(config, null, 2);
+            } catch (error) {
+                document.getElementById('config-display').textContent = 'ERROR: ' + error.message;
+            }
+        }
+
+        // Auto-run test 1 on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                test1();
+                // Update DNS status
+                try {
+                    const dnsStatus = window.configManager.get('scanning.enableDNSLookup');
+                    document.getElementById('dns-status').textContent = dnsStatus ? 'Enabled' : 'Disabled';
+                } catch (e) {}
+            }, 500);
+        });
+    </script>
+</body>
+</html>

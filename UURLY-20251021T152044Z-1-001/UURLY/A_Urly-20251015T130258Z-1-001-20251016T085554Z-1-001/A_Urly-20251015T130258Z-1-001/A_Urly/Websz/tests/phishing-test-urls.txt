@@ -1,0 +1,28 @@
+# PHISHING TEST URLS (Real examples that should trigger detection)
+
+# Classic phishing patterns that your scanner should detect:
+https://paypal-security-update.tk
+https://amazon-account-verification.ml
+https://microsoft-office365-login.ga
+https://google-drive-shared-document.cf
+https://facebook-security-check.tk
+
+# Banking phishing (these patterns should trigger warnings):
+https://secure-banking-login.info
+https://bank-account-suspended.net
+https://verify-your-paypal.org
+
+# URL shortener suspicious redirects:
+https://bit.ly/urgent-action
+https://tinyurl.com/security-alert
+
+# NOTE: For live phishing URLs, visit these sources:
+# 1. PhishTank: https://phishtank.org/
+# 2. OpenPhish: https://openphish.com/feed.txt
+# 3. Anti-Phishing Working Group: https://apwg.org/
+
+# Test with known phishing indicators:
+# - Suspicious TLDs: .tk, .ml, .ga, .cf
+# - Brand impersonation keywords
+# - Urgency words: "urgent", "suspended", "verify"
+# - Homograph attacks: using similar characters
