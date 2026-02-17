@@ -49,6 +49,7 @@ A modern URL scanning and validation tool built with Vite, React, and MySQL.
 - **Real-time Configuration** - Dynamic settings management
 - **Google Safe Browsing API** - Integration with GSB for threat detection
 - **Phishing Detection** - Advanced URL analysis
+- **Arduino/IoT Integration** - Use the scanner API from Arduino devices (ESP8266, ESP32, Arduino Uno)
 
 ## 📋 Prerequisites
 
@@ -176,6 +177,24 @@ Detailed documentation is available in the `/docs` folder:
 - [Database Documentation](docs/database/)
 - [API Documentation](docs/api/)
 - [Configuration Guide](docs/configuration/)
+
+### 🤖 Arduino/IoT Integration
+
+Use URLY Scanner with Arduino and IoT devices! Check out the [Arduino Integration Guide](arduino-examples/README.md) for:
+
+- **ESP8266/ESP32** - WiFi-enabled scanning
+- **Arduino Uno** - Ethernet shield integration  
+- **Example Code** - Ready-to-use sketches
+- **Hardware Guide** - Wiring diagrams and setup
+
+Perfect for building:
+- Smart URL filters
+- Parental control devices
+- IoT security gateways
+- Educational projects
+- Physical link safety checkers
+
+[📖 View Arduino Integration Guide →](arduino-examples/README.md)
 
 ## 🤝 Contributing
 
