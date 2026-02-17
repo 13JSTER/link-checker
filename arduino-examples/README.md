@@ -74,8 +74,11 @@ The URLY Scanner provides a REST API that can be accessed from Arduino devices w
 First, you need to have the URLY Scanner server running on your computer or a server.
 
 ```bash
-# Navigate to the scanner directory
-cd UURLY-20251021T152044Z-1-001/UURLY/A_Urly-20251015T130258Z-1-001-20251016T085554Z-1-001/A_Urly-20251015T130258Z-1-001/A_Urly/Websz
+# Navigate to the scanner directory (replace with your actual path)
+cd /path/to/link-checker/UURLY-20251021T152044Z-1-001/UURLY/A_Urly-20251015T130258Z-1-001-20251016T085554Z-1-001/A_Urly-20251015T130258Z-1-001/A_Urly/Websz
+
+# Or if you cloned the repository:
+# cd urly-scanner/Websz
 
 # Install dependencies
 npm install

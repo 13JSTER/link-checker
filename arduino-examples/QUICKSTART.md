@@ -54,9 +54,14 @@ Think of it as a **physical chatbot** that answers "Is this URL safe?" with colo
 
 ### Step 1: Start the Scanner Server
 ```bash
-# In your computer terminal
-cd UURLY-20251021T152044Z-1-001/UURLY/A_Urly-20251015T130258Z-1-001-20251016T085554Z-1-001/A_Urly-20251015T130258Z-1-001/A_Urly/Websz
+# In your computer terminal, navigate to the scanner directory
+# Replace this path with your actual installation path
+cd /path/to/link-checker/UURLY-20251021T152044Z-1-001/UURLY/A_Urly-20251015T130258Z-1-001-20251016T085554Z-1-001/A_Urly-20251015T130258Z-1-001/A_Urly/Websz
+
+# Install dependencies
 npm install
+
+# Start the scanner server
 npm run scan
 ```
 
