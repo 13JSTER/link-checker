@@ -1,6 +1,8 @@
 # URLY Scanner - Arduino Integration Guide
 
-This guide shows you how to integrate the URLY Scanner with Arduino-compatible devices for real-time URL scanning and threat detection.
+This guide shows you how to integrate the URLY Scanner with Arduino-compatible devices for real-time URL scanning and threat detection - like having a chatbot that responds with lights and messages!
+
+> **🚀 Want to get started quickly?** Check out the [Quick Start Guide](QUICKSTART.md) for a step-by-step tutorial!
 
 ## 🎯 Overview
 
@@ -45,14 +47,21 @@ The URLY Scanner provides a REST API that can be accessed from Arduino devices w
 
 ## 📁 Examples Included
 
-### 1. ESP8266 Example (`URLScanner_Arduino_ESP8266.ino`)
+### 1. ESP8266 Basic Example (`URLScanner_Arduino_ESP8266.ino`)
 - Full-featured example for ESP8266 boards
 - WiFi connectivity
 - JSON parsing with ArduinoJson
 - Interactive Serial Monitor interface
 - Auto-scanning capability
 
-### 2. Arduino Uno + Ethernet Example (`URLScanner_Arduino_Ethernet.ino`)
+### 2. ESP8266 + LED Interactive Example (`URLScanner_ESP8266_With_LED.ino`) ⭐ RECOMMENDED
+- **"Chatbot-like" experience with visual feedback**
+- RGB LED responds to scan results (like a chatbot with emotions!)
+- Blue = Scanning, Green = Safe, Yellow = Caution, Red = Unsafe
+- Interactive text responses via Serial Monitor
+- Perfect for learning and demonstrations
+
+### 3. Arduino Uno + Ethernet Example (`URLScanner_Arduino_Ethernet.ino`)
 - Optimized for limited memory (2KB RAM)
 - Wired Ethernet connection
 - Simplified JSON parsing
